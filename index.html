@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marriage Proposal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: url('https://images.unsplash.com/photo-1516236609140-6d27f3c4c289?fit=crop&w=500&h=500&q=80') no-repeat center center fixed; 
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Overlay for darkening the background */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        /* Page container styles */
+        .container {
+            position: relative;
+            z-index: 2;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        /* Initial Page */
+        .page-1, .page-2 {
+            display: none;
+        }
+
+        .page-1.active, .page-2.active {
+            display: block;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3rem;
+            color: #FF66B2;
+            margin-bottom: 20px;
+        }
+
+        /* Button styling */
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 15px 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            background: linear-gradient(45deg, #FF66B2, #FF3366);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            transition: 0.3s ease;
+            width: 45%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #FF3366, #FF66B2);
+        }
+
+        /* "No" Button Movement */
+        #noBtn {
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        #noBtn:hover {
+            transform: translateX(100px);
+        }
+
+        /* Response and Letter Styles */
+        .response {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .letter-content {
+            font-size: 1.2rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            color: #333;
+            text-align: left;
+            margin-top: 20px;
+            animation: unfold 0.8s ease forwards;
+        }
+
+        /* Footer Text */
+        .footer-text {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            font-size: 1rem;
+            color: #666;
+            font-style: italic;
+            z-index: 2;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes unfold {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            button { font-size: 1rem; padding: 12px; width: 100%; }
+            .letter-content { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <!-- Page 1: Initial Question -->
+    <div class="container page-1 active" id="page1">
+        <h1>Do you love me?</h1>
+        <div class="buttons">
+            <button id="yesBtn" onclick="showPage2()">Yes</button>
+            <button id="noBtn" onmouseover="moveButton()">No</button>
+        </div>
+    </div>
+
+    <!-- Page 2: Follow-up with Love Letter -->
+    <div class="container page-2" id="page2">
+        <div class="response">
+            I love you too! ❤️<br>
+            <img src="https://media.giphy.com/media/26uf3l0w2c5eRsRxC/giphy.gif" alt="Happy Gif" width="150">
+        </div>
+        <div class="letter-content" id="letterContent">
+            <p>My Dearest Handpump,</p>
+            <p>I’ve been thinking about how lucky I am to have you in my life, and I wanted to share a few reasons why...</p>
+            <p>Your love, kindness, and laughter make every day brighter. I cherish every moment we share...</p>
+            <p>Thank you for being you. I love you more than I can express and look forward to our future together.</p>
+            <p>Always yours,</p>
+            <p>Legpump ❤️</p>
+        </div>
+    </div>
+
+    <div class="footer-text">Made by Milanika only for Sahil</div>
+
+    <script>
+        // Function to show Page 2 when "Yes" is clicked
+        function showPage2() {
+            document.getElementById('page1').classList.remove('active');
+            document.getElementById('page2').classList.add('active');
+        }
+
+        // Function to move the "No" button on hover
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            const randomX = Math.random() * 200 - 100;
+            const randomY = Math.random() * 200 - 100;
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        }
+    </script>
+</body>
+</html>
