@@ -6,7 +6,6 @@
     <title>Marriage Proposal</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* General Reset */
         * {
             margin: 0;
             padding: 0;
@@ -15,113 +14,107 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background: url('https://images.unsplash.com/photo-1516236609140-6d27f3c4c289?fit=crop&w=500&h=500&q=80') no-repeat center center fixed; 
+            background: url('https://images.unsplash.com/photo-1516236609140-6d27f3c4c289?fit=crop&w=500&h=500&q=80') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            color: #fff;
-            overflow: hidden;
+            padding: 20px;
             position: relative;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
         }
 
-        /* Overlay for darkening the background */
         .overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
+            background: rgba(0, 0, 0, 0.6);
         }
 
-        /* Page container styles */
         .container {
             position: relative;
             z-index: 2;
-            padding: 30px;
-            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.85);
             border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
             width: 100%;
-            max-width: 600px;
-            text-align: center;
-        }
-
-        /* Initial Page */
-        .page-1, .page-2 {
-            display: none;
-        }
-
-        .page-1.active, .page-2.active {
-            display: block;
-            animation: fadeIn 1s ease-in-out;
+            max-width: 700px;
+            transition: transform 0.3s ease;
         }
 
         h1 {
             font-family: 'Pacifico', cursive;
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: #FF66B2;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        /* Button styling */
         .buttons {
             display: flex;
             justify-content: space-around;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
 
         button {
-            padding: 15px 25px;
+            padding: 15px 30px;
             font-size: 1.2rem;
             cursor: pointer;
             background: linear-gradient(45deg, #FF66B2, #FF3366);
             color: white;
             border: none;
             border-radius: 50px;
-            transition: 0.3s ease;
+            transition: all 0.3s ease;
             width: 45%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
         }
 
         button:hover {
             background: linear-gradient(45deg, #FF3366, #FF66B2);
+            transform: scale(1.05);
         }
 
-        /* "No" Button Movement */
-        #noBtn {
-            position: relative;
-            transition: transform 0.3s ease;
+        button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
         }
 
-        #noBtn:hover {
-            transform: translateX(100px);
-        }
-
-        /* Response and Letter Styles */
         .response {
+            margin-top: 20px;
             font-size: 1.5rem;
             font-weight: bold;
             color: #333;
             margin-bottom: 30px;
-            text-align: center;
         }
 
         .letter-content {
             font-size: 1.2rem;
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 20px;
-            border-radius: 10px;
-            color: #333;
-            text-align: left;
+            line-height: 1.8;
             margin-top: 20px;
-            animation: unfold 0.8s ease forwards;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            text-align: left;
+            color: #333;
+            max-height: 400px;
+            overflow-y: auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* Footer Text */
+        .letter-content p {
+            margin-bottom: 15px;
+        }
+
+        .letter-content p:last-child {
+            margin-bottom: 0;
+        }
+
         .footer-text {
             position: absolute;
             right: 20px;
@@ -132,68 +125,179 @@
             z-index: 2;
         }
 
-        /* Animations */
+        .fade-in {
+            animation: fadeIn 2s ease-out;
+        }
+
         @keyframes fadeIn {
             0% { opacity: 0; }
             100% { opacity: 1; }
         }
 
-        @keyframes unfold {
-            from { transform: scaleY(0); }
-            to { transform: scaleY(1); }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            button {
+                font-size: 1rem;
+                padding: 12px;
+            }
+            .letter-content {
+                font-size: 1rem;
+            }
         }
 
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
-            button { font-size: 1rem; padding: 12px; width: 100%; }
-            .letter-content { font-size: 1rem; }
+        .section {
+            display: none;
         }
+
+        .section.active {
+            display: block;
+        }
+
+        #noBtn {
+            position: relative;
+        }
+
+        .space-between {
+            margin-bottom: 30px;
+        }
+
+        .container {
+            transform: scale(0.98);
+        }
+
+        .container.active {
+            transform: scale(1);
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+            padding-bottom: 20px;
+        }
+
+        .image-gallery img {
+            width: 100%;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .image-gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal img {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 10px;
+        }
+
     </style>
 </head>
 <body>
     <div class="overlay"></div>
 
-    <!-- Page 1: Initial Question -->
-    <div class="container page-1 active" id="page1">
+    <!-- Main Section -->
+    <div class="container fade-in section active" id="mainSection">
         <h1>Do you love me?</h1>
         <div class="buttons">
-            <button id="yesBtn" onclick="showPage2()">Yes</button>
-            <button id="noBtn" onmouseover="moveButton()">No</button>
+            <button id="yesBtn" onclick="nextSection('loveSection')">Yes</button>
+            <button id="noBtn" onclick="answerNo()" onmouseover="moveNoButton()">No</button>
+        </div>
+        <div id="response" class="response"></div>
+    </div>
+
+    <!-- Love Section -->
+    <div class="container fade-in section" id="loveSection">
+        <h1>I love you too!</h1>
+        <div class="gif-container">
+            <!-- GIF Section -->
+            <img src="https://i.imgur.com/8FkndZg.gif" alt="Hurray GIF">
+        </div>
+        <button onclick="nextSection('letterSection')" class="letterBtn">Read My Letter</button>
+    </div>
+
+    <!-- Letter Section -->
+    <div class="container fade-in section" id="letterSection">
+        <h1>My Dearest Handpump</h1>
+        <div class="letter-content">
+            <p>I’ve been thinking about how lucky I am to have you in my life, and I wanted to take a moment to share just a few of the reasons why. Every day, I find myself more grateful for your love, your kindness, and your incredible ability to make everything feel a little brighter just by being you.</p>
+            <p>There’s something about the way you look at me, like I’m the most important person in the room, and it fills my heart with warmth. The way you laugh, the way you care, and the way you always seem to know how to make me feel better even on my toughest days—those are just a few of the things that make me fall even deeper in love with you.</p>
+            <p>I cherish all the little moments we share—the quiet conversations, the inside jokes, the simple times we’re just together. Even in silence, I feel connected to you, like we’re on the same wavelength, and that’s something I’ve never experienced before.</p>
+            <p>Thank you for being so patient, for listening when I need to talk, and for supporting me when I need encouragement. You bring out the best in me, and with you by my side, I feel like I can take on anything life throws our way.</p>
+            <p>I love you more than I have words to express, and I’m so thankful for the bond we’ve created together. Every day with you is a gift, and I can’t wait for all the adventures, laughter, and love that the future holds for us.</p>
+        </div>
+        <button onclick="nextSection('memoriesSection')" class="space-between">See Our Memories</button>
+    </div>
+
+    <!-- Our Memories Section -->
+    <div class="container fade-in section" id="memoriesSection">
+        <h1>Our Memories</h1>
+        <div class="image-gallery">
+            <img src="https://via.placeholder.com/150" alt="Memory 1" onclick="openModal('https://via.placeholder.com/600')">
+            <img src="https://via.placeholder.com/150" alt="Memory 2" onclick="openModal('https://via.placeholder.com/600')">
+            <img src="https://via.placeholder.com/150" alt="Memory 3" onclick="openModal('https://via.placeholder.com/600')">
+            <img src="https://via.placeholder.com/150" alt="Memory 4" onclick="openModal('https://via.placeholder.com/600')">
+            <img src="https://via.placeholder.com/150" alt="Memory 5" onclick="openModal('https://via.placeholder.com/600')">
+            <img src="https://via.placeholder.com/150" alt="Memory 6" onclick="openModal('https://via.placeholder.com/600')">
         </div>
     </div>
 
-    <!-- Page 2: Follow-up with Love Letter -->
-    <div class="container page-2" id="page2">
-        <div class="response">
-            I love you too! ❤️<br>
-            <img src="https://media.giphy.com/media/26uf3l0w2c5eRsRxC/giphy.gif" alt="Happy Gif" width="150">
-        </div>
-        <div class="letter-content" id="letterContent">
-            <p>My Dearest Handpump,</p>
-            <p>I’ve been thinking about how lucky I am to have you in my life, and I wanted to share a few reasons why...</p>
-            <p>Your love, kindness, and laughter make every day brighter. I cherish every moment we share...</p>
-            <p>Thank you for being you. I love you more than I can express and look forward to our future together.</p>
-            <p>Always yours,</p>
-            <p>Legpump ❤️</p>
-        </div>
+    <!-- Modal for Image Gallery -->
+    <div class="modal" id="modal" style="display: none;" onclick="closeModal()">
+        <img id="modalImage" src="" alt="Memory Image">
     </div>
 
-    <div class="footer-text">Made by Milanika only for Sahil</div>
+    <div class="footer-text">
+        Made by Milanika only for Sahil
+    </div>
 
     <script>
-        // Function to show Page 2 when "Yes" is clicked
-        function showPage2() {
-            document.getElementById('page1').classList.remove('active');
-            document.getElementById('page2').classList.add('active');
+        // Change Section visibility
+        function nextSection(sectionId) {
+            document.querySelector('.section.active').classList.remove('active');
+            document.getElementById(sectionId).classList.add('active');
         }
 
-        // Function to move the "No" button on hover
-        function moveButton() {
-            const noBtn = document.getElementById('noBtn');
-            const randomX = Math.random() * 200 - 100;
-            const randomY = Math.random() * 200 - 100;
-            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+        // Fun effect for the "No" button
+        function moveNoButton() {
+            var noButton = document.getElementById('noBtn');
+            var x = Math.random() * 80;
+            var y = Math.random() * 80;
+            noButton.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function answerNo() {
+            document.getElementById('response').textContent = 'Haha, you can\'t escape! You love me!';
+        }
+
+        // Modal Functionality
+        function openModal(imageSrc) {
+            var modal = document.getElementById('modal');
+            var modalImage = document.getElementById('modalImage');
+            modalImage.src = imageSrc;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
         }
     </script>
 </body>
