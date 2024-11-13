@@ -46,6 +46,11 @@
             width: 100%;
             max-width: 700px;
             transition: transform 0.3s ease;
+            display: none; /* Hidden by default */
+        }
+
+        .container.active {
+            display: block;
         }
 
         h1 {
@@ -80,11 +85,6 @@
             transform: scale(1.05);
         }
 
-        button:disabled {
-            background-color: #ddd;
-            cursor: not-allowed;
-        }
-
         .response {
             margin-top: 20px;
             font-size: 1.5rem;
@@ -107,14 +107,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .letter-content p {
-            margin-bottom: 15px;
-        }
-
-        .letter-content p:last-child {
-            margin-bottom: 0;
-        }
-
         .footer-text {
             position: absolute;
             right: 20px;
@@ -123,52 +115,6 @@
             color: #666;
             font-style: italic;
             z-index: 2;
-        }
-
-        .fade-in {
-            animation: fadeIn 2s ease-out;
-        }
-
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2rem;
-            }
-            button {
-                font-size: 1rem;
-                padding: 12px;
-            }
-            .letter-content {
-                font-size: 1rem;
-            }
-        }
-
-        .section {
-            display: none;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        #noBtn {
-            position: relative;
-        }
-
-        .space-between {
-            margin-bottom: 30px;
-        }
-
-        .container {
-            transform: scale(0.98);
-        }
-
-        .container.active {
-            transform: scale(1);
         }
 
         .image-gallery {
@@ -201,6 +147,7 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            display: none;
         }
 
         .modal img {
@@ -209,13 +156,78 @@
             border-radius: 10px;
         }
 
+        .gif-container img {
+            max-width: 100%;
+            max-height: 300px; /* Resize the Hurray sticker */
+            object-fit: contain;
+        }
+
+        .love-text {
+            font-size: 2rem;
+            color: #FF3366;
+            font-family: 'Pacifico', cursive;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .buttons button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .letter-content {
+                font-size: 1rem;
+                max-height: 300px;
+            }
+
+            .image-gallery {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-text {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .buttons button {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .letter-content {
+                font-size: 0.9rem;
+                max-height: 250px;
+            }
+
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="overlay"></div>
 
     <!-- Main Section -->
-    <div class="container fade-in section active" id="mainSection">
+    <div class="container active section" id="mainSection">
         <h1>Do you love me?</h1>
         <div class="buttons">
             <button id="yesBtn" onclick="nextSection('loveSection')">Yes</button>
@@ -225,17 +237,16 @@
     </div>
 
     <!-- Love Section -->
-    <div class="container fade-in section" id="loveSection">
+    <div class="container section" id="loveSection">
         <h1>I love you too!</h1>
         <div class="gif-container">
-            <!-- GIF Section -->
-            <img src="https://i.imgur.com/8FkndZg.gif" alt="Hurray GIF">
+            <img src="hurray.jpeg" alt="Hurray Image"> <!-- Replace with your Hurray image URL -->
         </div>
         <button onclick="nextSection('letterSection')" class="letterBtn">Read My Letter</button>
     </div>
 
     <!-- Letter Section -->
-    <div class="container fade-in section" id="letterSection">
+    <div class="container section" id="letterSection">
         <h1>My Dearest Handpump</h1>
         <div class="letter-content">
             <p>I’ve been thinking about how lucky I am to have you in my life, and I wanted to take a moment to share just a few of the reasons why. Every day, I find myself more grateful for your love, your kindness, and your incredible ability to make everything feel a little brighter just by being you.</p>
@@ -243,25 +254,27 @@
             <p>I cherish all the little moments we share—the quiet conversations, the inside jokes, the simple times we’re just together. Even in silence, I feel connected to you, like we’re on the same wavelength, and that’s something I’ve never experienced before.</p>
             <p>Thank you for being so patient, for listening when I need to talk, and for supporting me when I need encouragement. You bring out the best in me, and with you by my side, I feel like I can take on anything life throws our way.</p>
             <p>I love you more than I have words to express, and I’m so thankful for the bond we’ve created together. Every day with you is a gift, and I can’t wait for all the adventures, laughter, and love that the future holds for us.</p>
+            <p>Your wife,</p>
+            <p>Milanika</p>
         </div>
-        <button onclick="nextSection('memoriesSection')" class="space-between">See Our Memories</button>
+        <button onclick="nextSection('memoriesSection')">See Our Memories</button>
     </div>
 
     <!-- Our Memories Section -->
-    <div class="container fade-in section" id="memoriesSection">
+    <div class="container section" id="memoriesSection">
         <h1>Our Memories</h1>
         <div class="image-gallery">
-            <img src="https://via.placeholder.com/150" alt="Memory 1" onclick="openModal('https://via.placeholder.com/600')">
-            <img src="https://via.placeholder.com/150" alt="Memory 2" onclick="openModal('https://via.placeholder.com/600')">
-            <img src="https://via.placeholder.com/150" alt="Memory 3" onclick="openModal('https://via.placeholder.com/600')">
-            <img src="https://via.placeholder.com/150" alt="Memory 4" onclick="openModal('https://via.placeholder.com/600')">
-            <img src="https://via.placeholder.com/150" alt="Memory 5" onclick="openModal('https://via.placeholder.com/600')">
-            <img src="https://via.placeholder.com/150" alt="Memory 6" onclick="openModal('https://via.placeholder.com/600')">
+            <img src="lipi.jpg" alt="Memory 1" onclick="openModal('lipi.jpg')">
+            <img src="lipi3.jpg" alt="Memory 2" onclick="openModal('lipi2.jpg')">
+            <img src="lipi4.jpg" alt="Memory 3" onclick="openModal('lipi3.jpg')">
+        </div>
+        <div class="love-text">
+            I love you Geluuuu!
         </div>
     </div>
 
     <!-- Modal for Image Gallery -->
-    <div class="modal" id="modal" style="display: none;" onclick="closeModal()">
+    <div class="modal" id="modal" onclick="closeModal()">
         <img id="modalImage" src="" alt="Memory Image">
     </div>
 
@@ -270,13 +283,11 @@
     </div>
 
     <script>
-        // Change Section visibility
         function nextSection(sectionId) {
             document.querySelector('.section.active').classList.remove('active');
             document.getElementById(sectionId).classList.add('active');
         }
 
-        // Fun effect for the "No" button
         function moveNoButton() {
             var noButton = document.getElementById('noBtn');
             var x = Math.random() * 80;
@@ -288,7 +299,6 @@
             document.getElementById('response').textContent = 'Haha, you can\'t escape! You love me!';
         }
 
-        // Modal Functionality
         function openModal(imageSrc) {
             var modal = document.getElementById('modal');
             var modalImage = document.getElementById('modalImage');
@@ -302,3 +312,4 @@
     </script>
 </body>
 </html>
+
